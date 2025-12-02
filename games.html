@@ -109,12 +109,45 @@
             height: 300px;
         }
     }
+    .search-box {
+    width: 60%;
+    max-width: 400px;
+    padding: 12px 14px;
+
+    background: #123d18; /* your soft mid green */
+    color: #e8e3a0; /* soft gold text */
+    border: 2px solid #c5a500; /* darker modern gold */
+    border-radius: 10px;
+
+    font-size: 16px;
+    outline: none;
+    margin-top: 10px;
+    box-shadow: 0 0 10px rgba(197, 165, 0, 0.25);
+    transition: 0.2s;
+    }
+    .search-box::placeholder {
+    color: #bca84d;
+    }
+    .search-box:focus {
+    border-color: #e0c233;
+    box-shadow: 0 0 15px rgba(224, 194, 51, 0.4);
+    }
+    
 </style>
 </head>
 
 <body>
 
 <h1>Game Library</h1>
+
+<!-- SEARCH BAR -->
+<input 
+    type="text" 
+    id="searchBar" 
+    placeholder="Search for a game..." 
+    onkeyup="searchGames()"
+    class="search-box">
+
 
 <div class="game-grid">
 
@@ -252,6 +285,18 @@ function fullscreenFrame(frameId) {
     else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
     else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen();
     else alert("Fullscreen not supported 😿");
+}
+</script>
+
+    <script>
+function searchGames() {
+    const input = document.getElementById("searchBar").value.toLowerCase();
+    const cards = document.getElementsByClassName("game-card");
+
+    for (let i = 0; i < cards.length; i++) {
+        const title = cards[i].getElementsByTagName("h3")[0].innerText.toLowerCase();
+        cards[i].style.display = title.includes(input) ? "block" : "none";
+    }
 }
 </script>
 
