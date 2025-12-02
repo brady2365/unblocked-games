@@ -8,7 +8,7 @@
 <style>
     body {
         background: #0d1b0f; /* deep green */
-        color: #f5f5a5; /* soft yellow */
+        color: #e8e3a0; /* soft gold */
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 20px;
@@ -17,7 +17,7 @@
 
     h1 {
         margin-bottom: 20px;
-        color: #f8ffb5;
+        color: #f0e89c; /* lighter soft gold */
     }
 
     .game-grid {
@@ -36,8 +36,8 @@
         width: 100%;
         max-width: 400px;
 
-        border: 3px solid #ffd400; /* yellow border */
-        box-shadow: 0 0 18px rgba(255, 221, 0, 0.15); /* soft yellow glow */
+        border: 3px solid #d4b300; /* DARK GOLD */
+        box-shadow: 0 0 18px rgba(212, 179, 0, 0.15); /* modern gold glow */
     }
 
     iframe.game-frame {
@@ -48,7 +48,6 @@
         display: block;
     }
 
-    /* Overlay */
     .overlay {
         position: absolute;
         top: 16px;
@@ -56,7 +55,7 @@
         right: 16px;
         bottom: 16px;
         background: rgba(0, 0, 0, 0.7);
-        color: #fff;
+        color: #ffffff;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -76,15 +75,15 @@
         padding: 10px 16px;
         border-radius: 10px;
         border: none;
-        background: #ffd400; /* yellow */
-        color: #123d18; /* dark green */
+        background: #d4b300; /* DARK GOLD */
+        color: #123d18; /* deep green */
         cursor: pointer;
         font-weight: bold;
         transition: 0.2s;
     }
 
     .fullscreen-button:hover {
-        background: #ffe24d;
+        background: #e0c233; /* GOLD HOVER */
     }
 
     iframe {
@@ -93,10 +92,9 @@
 
     h2 {
         margin-top: 60px;
-        color: #f8ffb5;
+        color: #e8e3a0; /* soft gold */
     }
 
-    /* Responsive */
     @media (max-width: 1000px) {
         .game-grid {
             grid-template-columns: repeat(2, 1fr);
@@ -145,7 +143,6 @@
     </div>
 
     <!-- NEW ROW -->
-    <!-- Game 4 -->
     <div class="game-card">
         <h3>Cookie Clicker</h3>
         <iframe id="game4" class="game-frame" allowfullscreen></iframe>
@@ -153,7 +150,6 @@
         <button class="fullscreen-button" onclick="fullscreenFrame('game4')">Fullscreen</button>
     </div>
 
-    <!-- Game 5 -->
     <div class="game-card">
         <h3>Monkey Mart</h3>
         <iframe id="game5" class="game-frame" allowfullscreen></iframe>
@@ -161,7 +157,6 @@
         <button class="fullscreen-button" onclick="fullscreenFrame('game5')">Fullscreen</button>
     </div>
 
-    <!-- Game 6 -->
     <div class="game-card">
         <h3>Basket Random</h3>
         <iframe id="game6" class="game-frame" allowfullscreen></iframe>
@@ -170,7 +165,6 @@
     </div>
 
     <!-- NEW ROW -->
-    <!-- Game 7 -->
     <div class="game-card">
         <h3>OvO</h3>
         <iframe id="game7" class="game-frame" allowfullscreen></iframe>
@@ -178,7 +172,6 @@
         <button class="fullscreen-button" onclick="fullscreenFrame('game7')">Fullscreen</button>
     </div>
 
-    <!-- Game 8 -->
     <div class="game-card">
         <h3>Arc</h3>
         <iframe id="game8" class="game-frame" allowfullscreen></iframe>
@@ -186,7 +179,6 @@
         <button class="fullscreen-button" onclick="fullscreenFrame('game8')">Fullscreen</button>
     </div>
 
-    <!-- Game 9 -->
     <div class="game-card">
         <h3>Escape the Prison Game</h3>
         <iframe id="game9" class="game-frame" allowfullscreen></iframe>
@@ -195,7 +187,6 @@
     </div>
 
     <!-- NEW ROW -->
-    <!-- Game 10 -->
     <div class="game-card">
         <h3>Bitlife</h3>
         <iframe id="game10" class="game-frame" allowfullscreen></iframe>
@@ -203,7 +194,6 @@
         <button class="fullscreen-button" onclick="fullscreenFrame('game10')">Fullscreen</button>
     </div>
 
-    <!-- Game 11 -->
     <div class="game-card">
         <h3>Crossy Road</h3>
         <iframe id="game11" class="game-frame" allowfullscreen></iframe>
@@ -211,7 +201,6 @@
         <button class="fullscreen-button" onclick="fullscreenFrame('game11')">Fullscreen</button>
     </div>
 
-    <!-- Game 12 -->
     <div class="game-card">
         <h3>Paper.io</h3>
         <iframe id="game12" class="game-frame" allowfullscreen></iframe>
@@ -220,7 +209,6 @@
     </div>
 
     <!-- NEW ROW -->
-    <!-- Game 13 -->
     <div class="game-card">
         <h3>Snow Rider</h3>
         <iframe id="game13" class="game-frame" allowfullscreen></iframe>
@@ -228,7 +216,6 @@
         <button class="fullscreen-button" onclick="fullscreenFrame('game13')">Fullscreen</button>
     </div>
 
-    <!-- Game 14 -->
     <div class="game-card">
         <h3>Drift Boss</h3>
         <iframe id="game14" class="game-frame" allowfullscreen></iframe>
@@ -236,7 +223,6 @@
         <button class="fullscreen-button" onclick="fullscreenFrame('game14')">Fullscreen</button>
     </div>
 
-    <!-- Game 15 -->
     <div class="game-card">
         <h3>Devil Levil</h3>
         <iframe id="game15" class="game-frame" allowfullscreen></iframe>
