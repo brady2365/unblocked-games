@@ -139,12 +139,58 @@
         border-color: #e0c233;
         box-shadow: 0 0 15px rgba(224, 194, 51, 0.4);
     }
+    /* NAVBAR */
+    .navbar {
+        width: 100%;
+        background: #123d18; /* deep green */
+        border-bottom: 3px solid #d4b300; /* gold border */
+        padding: 12px 20px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        position: sticky;
+        top: 0;
+        z-index: 99999;
+    
+        box-shadow: 0 0 15px rgba(212, 179, 0, 0.25);
+    }
+
+    .navbar .logo {
+        color: #d4b300;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .navbar .nav-links a {
+        color: #e8e3a0;
+        margin-left: 20px;
+        text-decoration: none;
+        font-size: 18px;
+        transition: .2s;
+    }
+
+    .navbar .nav-links a:hover {
+        color: #fff;
+        text-shadow: 0 0 10px rgba(212, 179, 0, 0.5);
+    }
+
 </style>
 </head>
 
 <body>
 
-<h1>Game Library</h1>
+<div class="navbar">
+    <div class="logo">Classroom Hub</div>
+    <div class="nav-links">
+        <a href="#top">Home</a>
+        <a href="#games">Games</a>
+        <a href="#request">Requests</a>
+    </div>
+</div>
+
+<h1 id="games">Game Library</h1>
 
 <input 
     type="text" 
@@ -389,7 +435,7 @@
 
 <div class="separator"></div>
 
-<h2>Any requests for games to add?</h2>
+<h2 id="request">Any requests for games to add?</h2>
 
 <iframe src="https://forms.gle/krxNEueW7HhYcz2T6?embedded=true" width="40%" height="250" frameborder="0"></iframe>
 
