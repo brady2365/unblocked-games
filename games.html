@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <title>Classroom - Home</title>
   <link rel="icon" href="https://www.gstatic.com/classroom/favicon.png">
-
   <style>
     :root {
       --bg: #0d1b0f;
@@ -15,67 +14,55 @@
     }
 
     html, body {
-      height: 100%;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
+      font-family: Arial, sans-serif;
       background: var(--bg);
       color: var(--soft);
-      font-family: Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      padding-top: 100px; /* space for navbar */
+      scroll-behavior: smooth;
     }
 
     /* NAVBAR */
     .navbar {
-      width: 100%;
-      background: var(--card-bg);
-      border-bottom: 3px solid var(--gold);
-      padding: 12px 20px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 9999;
+      width: 100%;
+      background: var(--card-bg);
+      border-bottom: 3px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      z-index: 999;
       box-shadow: 0 0 15px rgba(212,179,0,0.12);
+      flex-wrap: wrap;
     }
 
     .logo {
       color: var(--gold);
-      font-size: 20px;
       font-weight: 700;
-      margin-bottom: 6px;
+      font-size: 20px;
     }
 
     .nav-search {
       flex: 1;
       display: flex;
       justify-content: center;
-      margin: 6px 0;
+      margin: 5px 0;
       min-width: 150px;
     }
 
     .nav-search input {
-      padding: 8px 12px;
-      width: 300px;
+      width: 250px;
       max-width: 100%;
-      border-radius: 10px;
+      padding: 6px 10px;
+      border-radius: 8px;
       border: 2px solid var(--gold);
-      outline: none;
-      background-color: #0f3114;
+      background: #0f3114;
       color: var(--soft);
+      outline: none;
       font-size: 15px;
-    }
-
-    .nav-search input::placeholder {
-      color: var(--gold);
-      opacity: 0.9;
     }
 
     .nav-links {
@@ -98,17 +85,24 @@
       text-shadow: 0 0 8px rgba(212,179,0,0.25);
     }
 
-    /* PAGE HEADING */
+    /* PAGE HEADINGS */
     .page-head {
       text-align: center;
+      padding-top: 90px; /* space for navbar */
       margin-bottom: 20px;
     }
 
-    .page-head h1 {
+    h1, h2 {
       color: var(--gold);
+      margin: 0 0 10px;
+    }
+
+    h1 {
       font-size: 28px;
-      margin: 0;
-      word-break: break-word; /* ensure it wraps */
+    }
+
+    h2 {
+      font-size: 22px;
     }
 
     .separator {
@@ -120,51 +114,26 @@
       opacity: 0.7;
     }
 
-    .categories {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 12px;
-      flex-wrap: wrap;
-    }
-
-    .cat-btn {
-      padding: 8px 14px;
-      background: transparent;
-      color: var(--soft);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    .cat-btn.active {
-      background: rgba(212,179,0,0.12);
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
+    /* GRID + CARDS */
     .game-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
       justify-items: center;
       margin: 20px auto;
-      padding: 0 6px;
-      width: 100%;
-      box-sizing: border-box;
+      width: 95%;
     }
 
     .game-card {
-      position: relative;
       background: var(--card-bg);
-      padding: 14px;
+      border: 3px solid var(--gold);
       border-radius: 14px;
       width: 100%;
       max-width: 420px;
-      border: 3px solid var(--gold);
+      padding: 14px;
       box-shadow: 0 0 18px rgba(212,179,0,0.12);
       transition: transform 0.15s ease, box-shadow 0.15s;
+      position: relative;
     }
 
     .game-card:hover {
@@ -173,17 +142,17 @@
     }
 
     .game-card h3 {
-      margin: 0 0 8px;
       color: var(--gold);
       font-size: 18px;
       text-align: center;
+      margin: 0 0 8px;
     }
 
     iframe.game-frame {
       width: 100%;
       height: 350px;
-      border: none;
       border-radius: 10px;
+      border: none;
       display: block;
       background: #000;
     }
@@ -226,12 +195,28 @@
       background: #e0c233;
     }
 
+    /* REQUEST SECTION */
+    .request-section {
+      text-align: center;
+      margin: 40px 0 60px; /* extra bottom spacing */
+    }
+
+    .request-section iframe {
+      width: 40%;
+      max-width: 560px;
+      min-width: 260px;
+      height: 250px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    /* RESPONSIVE */
     @media (max-width: 1000px) {
       .game-grid {
         grid-template-columns: repeat(2, 1fr);
       }
       .nav-search input {
-        width: 220px;
+        width: 180px;
       }
     }
 
@@ -243,29 +228,13 @@
         height: 300px;
       }
       .nav-search input {
-        width: 160px;
+        width: 140px;
       }
     }
-
-    .request-wrap {
-      display: flex;
-      justify-content: center;
-      margin-top: 18px;
-      margin-bottom: 40px; /* extra space under form */
-    }
-
-    .request-wrap iframe {
-      width: 40%;
-      max-width: 560px;
-      min-width: 260px;
-      border-radius: 8px;
-    }
-
   </style>
 </head>
 
 <body>
-
   <!-- NAVBAR -->
   <div class="navbar">
     <div class="logo">Classroom Hub</div>
@@ -285,15 +254,14 @@
 
   <div class="separator"></div>
 
-  <div class="categories" aria-hidden="true"></div>
-
   <div id="gameContainer" class="game-grid"></div>
 
   <div class="separator"></div>
 
-  <h2 id="request">Any requests for games to add?</h2>
-  <div class="request-wrap">
-    <iframe src="https://forms.gle/krxNEueW7HhYcz2T6?embedded=true" width="40%" height="250" frameborder="0"></iframe>
+  <!-- REQUEST SECTION -->
+  <div class="request-section">
+    <h2 id="request">Any requests for games to add?</h2>
+    <iframe src="https://forms.gle/krxNEueW7HhYcz2T6?embedded=true"></iframe>
   </div>
 
   <script>
@@ -335,17 +303,13 @@
 
     function createCardHTML(g) {
       return `
-        <div class="game-card" data-title="${escapeHtml(g.title)}">
-          <h3>${escapeHtml(g.title)}</h3>
+        <div class="game-card" data-title="${g.title}">
+          <h3>${g.title}</h3>
           <iframe id="${g.id}" class="game-frame" allowfullscreen></iframe>
-          <div class="overlay" role="button" aria-label="Play ${escapeHtml(g.title)}" onclick="loadGame('${g.id}','${g.url}', this)">Play</div>
+          <div class="overlay" onclick="loadGame('${g.id}','${g.url}', this)">Play</div>
           <button class="fullscreen-button" onclick="fullscreenFrame('${g.id}')">Fullscreen</button>
         </div>
       `;
-    }
-
-    function escapeHtml(str) {
-      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
 
     games.forEach(g => container.insertAdjacentHTML('beforeend', createCardHTML(g)));
@@ -354,36 +318,25 @@
       const iframe = document.getElementById(frameId);
       if(!iframe) return;
       iframe.src = url;
-      if(overlayEl){ overlayEl.style.display = 'none'; } 
-      else {
-        const overlay = iframe.parentElement.querySelector('.overlay');
-        if(overlay) overlay.style.display = 'none';
-      }
+      overlayEl.style.display = 'none';
     }
 
     function fullscreenFrame(frameId) {
       const iframe = document.getElementById(frameId);
       if(!iframe) return;
-      try {
-        if (iframe.requestFullscreen) iframe.requestFullscreen();
-        else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
-        else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen();
-        else alert("Fullscreen not supported 😿");
-      } catch(e){ console.warn("Fullscreen failed", e); }
+      if(iframe.requestFullscreen) iframe.requestFullscreen();
+      else if(iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
+      else if(iframe.msRequestFullscreen) iframe.msRequestFullscreen();
+      else alert("Fullscreen not supported 😿");
     }
 
     function searchGames() {
-      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+      const q = document.getElementById('searchInput').value.toLowerCase();
       document.querySelectorAll('.game-card').forEach(card => {
         const title = card.getAttribute('data-title').toLowerCase();
         card.style.display = title.includes(q) ? 'block' : 'none';
       });
     }
-
-    document.getElementById('searchInput').addEventListener('keydown', function(e){
-      if(e.key === 'Escape'){ this.value=''; searchGames(); }
-    });
   </script>
-
 </body>
 </html>
