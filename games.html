@@ -115,45 +115,22 @@
         }
     }
 
-    /* Search box styling */
-    .search-box {
-        width: 60%;
-        max-width: 400px;
-        padding: 12px 14px;
-
-        background: #123d18;
-        color: #e8e3a0;
-        border: 2px solid #c5a500;
-        border-radius: 10px;
-
-        font-size: 16px;
-        outline: none;
-        margin-top: 10px;
-        box-shadow: 0 0 10px rgba(197, 165, 0, 0.25);
-        transition: 0.2s;
-    }
-    .search-box::placeholder {
-        color: #bca84d;
-    }
-    .search-box:focus {
-        border-color: #e0c233;
-        box-shadow: 0 0 15px rgba(224, 194, 51, 0.4);
-    }
-    /* NAVBAR */
+   
+   /* NAVBAR */
     .navbar {
         width: 100%;
         background: #123d18; /* deep green */
-        border-bottom: 3px solid #d4b300; /* gold border */
+        border-bottom: 3px solid #d4b300; /* gold */
         padding: 12px 20px;
 
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 20px;
 
         position: sticky;
         top: 0;
-        z-index: 99999;
-    
+        z-index: 9999;
         box-shadow: 0 0 15px rgba(212, 179, 0, 0.25);
     }
 
@@ -163,7 +140,24 @@
         font-weight: bold;
     }
 
-    .navbar .nav-links a {
+    /* NAV SEARCH BOX */
+    .nav-search input {
+        padding: 8px 12px;
+        width: 230px;
+        border-radius: 10px;
+        outline: none;
+        border: 2px solid #d4b300;
+        background-color: #0f3114;
+        color: #fff;
+        font-size: 15px;
+    }
+
+    .nav-search input::placeholder {
+        color: #d4b300;
+    }
+
+    /* NAV LINKS */
+    .nav-links a {
         color: #e8e3a0;
         margin-left: 20px;
         text-decoration: none;
@@ -171,7 +165,7 @@
         transition: .2s;
     }
 
-    .navbar .nav-links a:hover {
+    .nav-links a:hover {
         color: #fff;
         text-shadow: 0 0 10px rgba(212, 179, 0, 0.5);
     }
@@ -183,21 +177,19 @@
 
 <div class="navbar">
     <div class="logo">Classroom Hub</div>
+
+    <div class="nav-search">
+        <input type="text" id="searchInput" placeholder="Search games..." onkeyup="searchGames()">
+    </div>
+
     <div class="nav-links">
-        <a href="#top">Home</a>
         <a href="#games">Games</a>
-        <a href="#request">Requests</a>
+        <a href="#request">Request</a>
     </div>
 </div>
 
-<h1 id="games">Game Library</h1>
 
-<input 
-    type="text" 
-    id="searchBar" 
-    placeholder="Search for a game..." 
-    onkeyup="searchGames()"
-    class="search-box">
+<h1 id="games">Game Library</h1>
 
 <div class="separator"></div>
 
