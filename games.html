@@ -452,13 +452,13 @@ function fullscreenFrame(frameId) {
 
 <script>
 function searchGames() {
-    const input = document.getElementById("searchBar").value.toLowerCase();
-    const cards = document.getElementsByClassName("game-card");
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const cards = document.querySelectorAll(".game-card");
 
-    for (let i = 0; i < cards.length; i++) {
-        const title = cards[i].getElementsByTagName("h3")[0].innerText.toLowerCase();
-        cards[i].style.display = title.includes(input) ? "block" : "none";
-    }
+    cards.forEach(card => {
+        const title = card.querySelector("h3").innerText.toLowerCase();
+        card.style.display = title.includes(input) ? "block" : "none";
+    });
 }
 </script>
 
