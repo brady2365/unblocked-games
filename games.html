@@ -6,461 +6,361 @@
 <link rel="icon" href="https://www.gstatic.com/classroom/favicon.png">
 
 <style>
-    body {
-        background: #0d1b0f; /* deep green */
-        color: #e8e3a0; /* soft gold */
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-        text-align: center;
+  :root{
+    --bg: #0d1b0f;
+    --card-bg: #123d18;
+    --gold: #d4b300;
+    --soft: #e8e3a0;
+    --muted: #5a5a5a;
+  }
+
+  /* Base */
+  html,body{height:100%}
+  body {
+    background: var(--bg);
+    color: var(--soft);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0 20px 40px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* NAVBAR */
+  .navbar {
+      width: 100%;
+      background: var(--card-bg);
+      border-bottom: 3px solid var(--gold);
+      padding: 12px 20px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      box-shadow: 0 0 15px rgba(212,179,0,0.12);
     }
 
-    /* Updated headers to match game-card border color */
-    h1, h2 {
-        color: #d4b300; /* dark gold (same as card border) */
+  .navbar .logo {
+      color: var(--gold);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: .4px;
+  }
+
+  .nav-search {
+    margin-left: 8px;
+    flex: 1;
+    display:flex;
+    justify-content:center;
+  }
+
+  .nav-search input {
+    padding: 8px 12px;
+    width: 380px;
+    max-width: 100%;
+    border-radius: 10px;
+    outline: none;
+    border: 2px solid var(--gold);
+    background-color: #0f3114;
+    color: var(--soft);
+    font-size: 15px;
+  }
+
+  .nav-search input::placeholder { color: var(--gold); opacity:.9; }
+
+  .nav-links {
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
+
+  .nav-links a {
+    color: var(--soft);
+    text-decoration:none;
+    font-size: 15px;
+  }
+
+  .nav-links a:hover { color: #fff; text-shadow: 0 0 8px rgba(212,179,0,0.25); }
+
+  /* Page headings */
+  .page-head {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    padding: 20px 0 10px;
+  }
+
+  h1, h2 { color: var(--gold); margin: 0; }
+  h1 { font-size: 28px; }
+
+  .separator {
+    width: 90%;
+    height: 3px;
+    background: var(--muted);
+    border-radius: 3px;
+    margin: 20px auto;
+    opacity: 0.7;
+  }
+
+  /* Categories placeholder (you can expand later) */
+  .categories {
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:12px;
+    flex-wrap:wrap;
+  }
+
+  .cat-btn {
+    padding:8px 14px;
+    background: transparent;
+    color: var(--soft);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    cursor:pointer;
+    font-size:13px;
+  }
+
+  .cat-btn.active {
+    background: rgba(212,179,0,0.12);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* Grid + cards */
+  .game-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      justify-items: center;
+      margin: 20px 0;
+      padding: 0 6px;
+      width: 100%;
+      box-sizing: border-box;
+  }
+
+  .game-card {
+      position: relative;
+      background: var(--card-bg);
+      padding: 14px;
+      border-radius: 14px;
+      width: 100%;
+      max-width: 420px;
+      border: 3px solid var(--gold);
+      box-shadow: 0 0 18px rgba(212,179,0,0.12);
+      transition: transform .15s ease, box-shadow .15s;
     }
 
-    /* Modern clean separator line */
-    .separator {
-        width: 90%;
-        height: 3px;
-        background: #5a5a5a; /* modern dark gray */
-        border-radius: 3px;
-        margin: 50px auto;
-        opacity: 0.7;
-    }
+  .game-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.45); }
 
-    .game-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-        justify-items: center;
-        margin-top: 30px;
-    }
+  .game-card h3 { margin: 0 0 8px; color: var(--gold); font-size: 18px; text-align:center; }
 
-    .game-card {
-        position: relative;
-        background: #123d18; 
-        padding: 16px;
-        border-radius: 14px;
-        width: 100%;
-        max-width: 400px;
+  iframe.game-frame {
+      width: 100%;
+      height: 350px;
+      border: none;
+      border-radius: 10px;
+      display: block;
+      background: #000;
+  }
 
-        border: 3px solid #d4b300; /* dark gold */
-        box-shadow: 0 0 18px rgba(212, 179, 0, 0.15);
-    }
+  .overlay {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 2;
+      transition: background .18s;
+  }
 
-    iframe.game-frame {
-        width: 100%;
-        height: 350px;
-        border: none;
-        border-radius: 10px;
-        display: block;
-    }
+  .overlay:hover { background: rgba(0,0,0,0.55); }
 
-    .overlay {
-        position: absolute;
-        top: 16px;
-        left: 16px;
-        right: 16px;
-        bottom: 16px;
-        background: rgba(0, 0, 0, 0.7);
-        color: #ffffff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 10px;
-        font-size: 20px;
-        cursor: pointer;
-        z-index: 2;
-        transition: 0.2s;
-    }
+  .fullscreen-button {
+      margin-top: 10px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: none;
+      background: var(--gold);
+      color: var(--card-bg);
+      cursor: pointer;
+      font-weight: bold;
+      width: 100%;
+  }
 
-    .overlay:hover {
-        background: rgba(0, 0, 0, 0.55);
-    }
+  .fullscreen-button:hover { background: #e0c233; }
 
-    .fullscreen-button {
-        margin-top: 10px;
-        padding: 10px 16px;
-        border-radius: 10px;
-        border: none;
-        background: #d4b300;
-        color: #123d18;
-        cursor: pointer;
-        font-weight: bold;
-        transition: 0.2s;
-    }
+  @media (max-width: 1000px) {
+    .game-grid { grid-template-columns: repeat(2, 1fr); }
+    .nav-search input { width: 240px; }
+  }
 
-    .fullscreen-button:hover {
-        background: #e0c233;
-    }
+  @media (max-width: 650px) {
+    .game-grid { grid-template-columns: 1fr; }
+    iframe.game-frame { height: 300px; }
+    .navbar { padding:10px; gap:10px; }
+    .nav-search { order: 3; width:100%; display:flex; justify-content:center; }
+  }
 
-    iframe {
-        border-radius: 10px;
-    }
-
-    @media (max-width: 1000px) {
-        .game-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (max-width: 650px) {
-        .game-grid {
-            grid-template-columns: 1fr;
-        }
-        iframe.game-frame {
-            height: 300px;
-        }
-    }
-
-   
-   /* NAVBAR */
-    .navbar {
-        width: 100%;
-        background: #123d18; /* deep green */
-        border-bottom: 3px solid #d4b300; /* gold */
-        padding: 12px 20px;
-
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 20px;
-
-        position: sticky;
-        top: 0;
-        z-index: 9999;
-        box-shadow: 0 0 15px rgba(212, 179, 0, 0.25);
-    }
-
-    .navbar .logo {
-        color: #d4b300;
-        font-size: 22px;
-        font-weight: bold;
-    }
-
-    /* NAV SEARCH BOX */
-    .nav-search input {
-        padding: 8px 12px;
-        width: 230px;
-        border-radius: 10px;
-        outline: none;
-        border: 2px solid #d4b300;
-        background-color: #0f3114;
-        color: #fff;
-        font-size: 15px;
-    }
-
-    .nav-search input::placeholder {
-        color: #d4b300;
-    }
-
-    /* NAV LINKS */
-    .nav-links a {
-        color: #e8e3a0;
-        margin-left: 20px;
-        text-decoration: none;
-        font-size: 18px;
-        transition: .2s;
-    }
-
-    .nav-links a:hover {
-        color: #fff;
-        text-shadow: 0 0 10px rgba(212, 179, 0, 0.5);
-    }
+  /* request form iframe responsiveness */
+  .request-wrap { display:flex; justify-content:center; margin-top: 18px; }
+  .request-wrap iframe { width: 40%; max-width: 560px; min-width: 260px; border-radius:8px; }
 
 </style>
 </head>
 
 <body>
 
-<div class="navbar">
-    <div class="logo">Classroom Hub</div>
+  <!-- NAVBAR -->
+  <div class="navbar">
+      <div class="logo">Classroom Hub</div>
 
-    <div class="nav-search">
-        <input type="text" id="searchInput" placeholder="Search games..." onkeyup="searchGames()">
-    </div>
+      <div class="nav-search">
+          <input type="text" id="searchInput" placeholder="Search games..." oninput="searchGames()">
+      </div>
 
-    <div class="nav-links">
-        <a href="#games">Games</a>
-        <a href="#request">Request</a>
-    </div>
-</div>
+      <div class="nav-links">
+          <a href="#games">Games</a>
+          <a href="#request">Request</a>
+      </div>
+  </div>
 
+  <!-- Page head -->
+  <div class="page-head" style="padding-top:12px;">
+    <h1 id="games">Game Library</h1>
+  </div>
 
-<h1 id="games">Game Library</h1>
+  <div class="separator"></div>
 
-<div class="separator"></div>
+  <!-- category area (keeps layout neat; optional) -->
+  <div class="categories" aria-hidden="true">
+    <!-- buttons left here for future category filtering -->
+  </div>
 
-<div class="game-grid">
+  <!-- GAME GRID (auto-generated) -->
+  <div id="gameContainer" class="game-grid"></div>
 
-    <!-- Game 1 -->
-    <div class="game-card">
-        <h3>Retro Bowl</h3>
-        <iframe id="game1" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game1', 'https://class1811.github.io/g5/class-400/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game1')">Fullscreen</button>
-    </div>
+  <div class="separator"></div>
 
-    <!-- Game 2 -->
-    <div class="game-card">
-        <h3>Slope</h3>
-        <iframe id="game2" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game2', 'https://class1811.github.io/g5/class-450/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game2')">Fullscreen</button>
-    </div>
+  <h2 id="request">Any requests for games to add?</h2>
+  <div class="request-wrap">
+    <iframe src="https://forms.gle/krxNEueW7HhYcz2T6?embedded=true" width="40%" height="250" frameborder="0"></iframe>
+  </div>
 
-    <!-- Game 3 -->
-    <div class="game-card">
-        <h3>Stickman Hook Game</h3>
-        <iframe id="game3" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game3', 'https://class1811.github.io/g5/class-406/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game3')">Fullscreen</button>
-    </div>
+  <!-- SCRIPTS: games array + generator + functions -->
+  <script>
+    // ---------- GAMES: exact names + URLs from your original file ----------
+    const games = [
+      { title: "Retro Bowl", id: "game1", url: "https://class1811.github.io/g5/class-400/" },
+      { title: "Slope", id: "game2", url: "https://class1811.github.io/g5/class-450/" },
+      { title: "Stickman Hook Game", id: "game3", url: "https://class1811.github.io/g5/class-406/" },
+      { title: "Cookie Clicker", id: "game4", url: "https://class1811.github.io/g5/class-448/" },
+      { title: "Monkey Mart", id: "game5", url: "https://class1811.github.io/g77/class-829/" },
+      { title: "Basket Random", id: "game6", url: "https://class1811.github.io/g26/class-436/" },
+      { title: "OvO", id: "game7", url: "https://class1811.github.io/g5/class-456/" },
+      { title: "Arc", id: "game8", url: "https://ragdollarchers.github.io/embed/ragdoll-archers.html" },
+      { title: "Escape the Prison Game", id: "game9", url: "https://class1811.github.io/g97/class-780/" },
+      { title: "Bitlife", id: "game10", url: "https://class1811.github.io/g5/class-441/" },
+      { title: "Crossy Road", id: "game11", url: "https://class1811.github.io/g20/class-402/" },
+      { title: "Paper.io", id: "game12", url: "https://class1811.github.io/g/class-505/" },
+      { title: "Snow Rider", id: "game13", url: "https://tylerpalko.github.io/gamehub/snowrider3d/" },
+      { title: "Drift Boss", id: "game14", url: "https://class1811.github.io/g5/class-472/" },
+      { title: "Devil Level", id: "game15", url: "https://class1811.github.io/g22/class-356/" },
+      { title: "Escape Road 1", id: "game16", url: "https://azgames.io/game/escape-road/" },
+      { title: "Escape Road 2", id: "game17", url: "https://escaperoad.io/escape-road-2.embed" },
+      { title: "Crazy Cattle 3d", id: "game18", url: "https://crazycattle3d.github.io/" },
+      { title: "Race Royale", id: "game19", url: "https://www.gamegab.com/content/games/race-survival-arena-king/" },
+      { title: "Steal a Brainrot", id: "game20", url: "https://st.8games.net/9/8g/igra-ukradi-brejnrot-original-3d/" },
+      { title: "Tiny Fishing", id: "game21", url: "https://class1811.github.io/g5/class-451/" },
+      { title: "Football Bros", id: "game22", url: "https://gnhustgames.github.io/football-bros/" },
+      { title: "Spacebar Clicker", id: "game23", url: "https://sciencemathedu.github.io/space/" },
+      { title: "1v1.lol", id: "game24", url: "https://1v1-lol-unblocked.gitlab.io/file/" },
+      { title: "Cluster Rush", id: "game25", url: "https://htmlxm.github.io/h8/cluster-rush/" },
+      { title: "Vex 7", id: "game26", url: "https://vex7online.github.io/file/" },
+      { title: "Highway Traffic", id: "game27", url: "https://class1811.github.io/g97/class-522/" },
+      { title: "Super Mario Bros", id: "game28", url: "https://class1811.github.io/g/class-826/" },
+      { title: "Snow Battle Io", id: "game29", url: "https://sciencemathlearning.github.io/snowbattle/" },
+      { title: "Gladihopper", id: "game30", url: "https://gnhustgames.github.io/gladihoppers/" },
+      { title: "Youtube", id: "game31", url: "https://613tube.com/" }
+    ];
 
-    <!-- NEW ROW -->
-    <div class="game-card">
-        <h3>Cookie Clicker</h3>
-        <iframe id="game4" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game4', 'https://class1811.github.io/g5/class-448/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game4')">Fullscreen</button>
-    </div>
+    // ---------- GENERATE CARDS ----------
+    const container = document.getElementById('gameContainer');
 
-    <div class="game-card">
-        <h3>Monkey Mart</h3>
-        <iframe id="game5" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game5', 'https://class1811.github.io/g77/class-829/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game5')">Fullscreen</button>
-    </div>
+    function createCardHTML(g){
+      return `
+        <div class="game-card" data-title="${escapeHtml(g.title)}">
+            <h3>${escapeHtml(g.title)}</h3>
+            <iframe id="${g.id}" class="game-frame" allowfullscreen></iframe>
 
-    <div class="game-card">
-        <h3>Basket Random</h3>
-        <iframe id="game6" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game6', 'https://class1811.github.io/g26/class-436/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game6')">Fullscreen</button>
-    </div>
+            <div class="overlay" role="button" aria-label="Play ${escapeHtml(g.title)}" onclick="loadGame('${g.id}','${g.url}', this)">
+                Play
+            </div>
 
-    <!-- NEW ROW -->
-    <div class="game-card">
-        <h3>OvO</h3>
-        <iframe id="game7" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game7', 'https://class1811.github.io/g5/class-456/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game7')">Fullscreen</button>
-    </div>
+            <button class="fullscreen-button" onclick="fullscreenFrame('${g.id}')">Fullscreen</button>
+        </div>
+      `;
+    }
 
-    <div class="game-card">
-        <h3>Arc</h3>
-        <iframe id="game8" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game8', 'https://ragdollarchers.github.io/embed/ragdoll-archers.html')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game8')">Fullscreen</button>
-    </div>
+    // helper to avoid breaking titles (just in case)
+    function escapeHtml(str){
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
 
-    <div class="game-card">
-        <h3>Escape the Prison Game</h3>
-        <iframe id="game9" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game9', 'https://class1811.github.io/g97/class-780/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game9')">Fullscreen</button>
-    </div>
+    // Actually render
+    games.forEach(g => container.insertAdjacentHTML('beforeend', createCardHTML(g)));
 
-    <!-- NEW ROW -->
-    <div class="game-card">
-        <h3>Bitlife</h3>
-        <iframe id="game10" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game10', 'https://class1811.github.io/g5/class-441/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game10')">Fullscreen</button>
-    </div>
+    // ---------- FUNCTIONS: load, fullscreen, search ----------
+    function loadGame(frameId, url, overlayEl) {
+      const iframe = document.getElementById(frameId);
+      if(!iframe) return;
+      iframe.src = url;
 
-    <div class="game-card">
-        <h3>Crossy Road</h3>
-        <iframe id="game11" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game11', 'https://class1811.github.io/g20/class-402/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game11')">Fullscreen</button>
-    </div>
+      // hide overlay (use provided overlay element or find it)
+      if(overlayEl){
+        overlayEl.style.display = 'none';
+      } else {
+        const overlay = iframe.parentElement.querySelector('.overlay');
+        if(overlay) overlay.style.display = 'none';
+      }
+    }
 
-    <div class="game-card">
-        <h3>Paper.io</h3>
-        <iframe id="game12" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game12', 'https://class1811.github.io/g/class-505/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game12')">Fullscreen</button>
-    </div>
+    function fullscreenFrame(frameId) {
+      const iframe = document.getElementById(frameId);
+      if(!iframe) return;
+      try {
+        if (iframe.requestFullscreen) iframe.requestFullscreen();
+        else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
+        else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen();
+        else alert("Fullscreen not supported 😿");
+      } catch(e){
+        console.warn("Fullscreen failed", e);
+      }
+    }
 
-    <!-- NEW ROW -->
-    <div class="game-card">
-        <h3>Snow Rider</h3>
-        <iframe id="game13" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game13', 'https://tylerpalko.github.io/gamehub/snowrider3d/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game13')">Fullscreen</button>
-    </div>
+    function searchGames(){
+      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+      document.querySelectorAll('.game-card').forEach(card => {
+        const title = card.getAttribute('data-title').toLowerCase();
+        card.style.display = title.includes(q) ? 'block' : 'none';
+      });
+    }
 
-    <div class="game-card">
-        <h3>Drift Boss</h3>
-        <iframe id="game14" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game14', 'https://class1811.github.io/g5/class-472/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game14')">Fullscreen</button>
-    </div>
-
-    <div class="game-card">
-        <h3>Devil Level</h3>
-        <iframe id="game15" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game15', 'https://class1811.github.io/g22/class-356/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game15')">Fullscreen</button>
-    </div>
-     
-    <!-- NEW ROW -->
-    <div class="game-card">
-        <h3>Escape Road 1</h3>
-        <iframe id="game16" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game16', 'https://azgames.io/game/escape-road/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game16')">Fullscreen</button>
-    </div>
-
-    <div class="game-card">
-        <h3>Escape Road 2</h3>
-        <iframe id="game17" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game17', 'https://escaperoad.io/escape-road-2.embed')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game17')">Fullscreen</button>
-    </div>
-
-    <div class="game-card">
-        <h3>Crazy Cattle 3d</h3>
-        <iframe id="game18" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game18', 'https://crazycattle3d.github.io/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game18')">Fullscreen</button>
-    </div>
-
-     <!-- NEW ROW -->
-    <div class="game-card">
-        <h3>Race Royale</h3>
-        <iframe id="game19" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game19', 'https://www.gamegab.com/content/games/race-survival-arena-king/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game19')">Fullscreen</button>
-    </div>
-
-    <div class="game-card">
-        <h3>Steal a Brainrot</h3>
-        <iframe id="game20" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game20', 'https://st.8games.net/9/8g/igra-ukradi-brejnrot-original-3d/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game20')">Fullscreen</button>
-    </div>
-
-    <div class="game-card">
-        <h3>Tiny Fishing</h3>
-        <iframe id="game21" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game21', 'https://class1811.github.io/g5/class-451/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game21')">Fullscreen</button>
-    </div>
-       
-    <!-- NEW ROW -->
-    <div class="game-card">
-        <h3>Football Bros</h3>
-        <iframe id="game22" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game22', 'https://gnhustgames.github.io/football-bros/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game22')">Fullscreen</button>
-    </div>
-
-    <div class="game-card">
-        <h3>Spacebar Clicker</h3>
-        <iframe id="game23" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game23', 'https://sciencemathedu.github.io/space/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game23')">Fullscreen</button>
-    </div>
-
-    <div class="game-card">
-        <h3>1v1.lol</h3>
-        <iframe id="game24" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game24', 'https://1v1-lol-unblocked.gitlab.io/file/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game24')">Fullscreen</button>
-    </div>
-
-     <!-- NEW ROW -->
-    <div class="game-card">
-        <h3>Cluster Rush</h3>
-        <iframe id="game25" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game25', 'https://htmlxm.github.io/h8/cluster-rush/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game25')">Fullscreen</button>
-    </div>
-
-    <div class="game-card">
-        <h3>Vex 7</h3>
-        <iframe id="game26" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game26', 'https://vex7online.github.io/file/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game26')">Fullscreen</button>
-    </div>
-
-    <div class="game-card">
-        <h3>Highway Traffic</h3>
-        <iframe id="game27" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game27', 'https://class1811.github.io/g97/class-522/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game27')">Fullscreen</button>
-    </div>
-   
-    <!-- NEW ROW -->
-    <div class="game-card">
-        <h3>Super Mario Bros</h3>
-        <iframe id="game28" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game28', 'https://class1811.github.io/g/class-826/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game28')">Fullscreen</button>
-    </div>
-
-    <div class="game-card">
-        <h3>Snow Battle Io</h3>
-        <iframe id="game29" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game29', 'https://sciencemathlearning.github.io/snowbattle/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game29')">Fullscreen</button>
-    </div>
-
-    <div class="game-card">
-        <h3>Gladihopper</h3>
-        <iframe id="game30" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game30', 'https://gnhustgames.github.io/gladihoppers/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game30')">Fullscreen</button>
-    </div>
-     
-    <div class="game-card">
-        <h3>Youtube</h3>
-        <iframe id="game31" class="game-frame" allowfullscreen></iframe>
-        <div class="overlay" onclick="loadGame('game31', 'https://613tube.com/')">Play</div>
-        <button class="fullscreen-button" onclick="fullscreenFrame('game31')">Fullscreen</button>
-    </div>
-</div>
-
-<div class="separator"></div>
-
-<h2 id="request">Any requests for games to add?</h2>
-
-<iframe src="https://forms.gle/krxNEueW7HhYcz2T6?embedded=true" width="40%" height="250" frameborder="0"></iframe>
-
-<script>
-function loadGame(frameId, url) {
-    const iframe = document.getElementById(frameId);
-    iframe.src = url;
-    const overlay = iframe.nextElementSibling;
-    overlay.style.display = 'none';
-}
-
-function fullscreenFrame(frameId) {
-    const iframe = document.getElementById(frameId);
-    if (!iframe) return;
-
-    if (iframe.requestFullscreen) iframe.requestFullscreen();
-    else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
-    else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen();
-    else alert("Fullscreen not supported 😿");
-}
-</script>
-
-<script>
-function searchGames() {
-    const input = document.getElementById("searchInput").value.toLowerCase();
-    const cards = document.querySelectorAll(".game-card");
-
-    cards.forEach(card => {
-        const title = card.querySelector("h3").innerText.toLowerCase();
-        card.style.display = title.includes(input) ? "block" : "none";
+    // optional: support pressing Enter to search (nice UX)
+    document.getElementById('searchInput').addEventListener('keydown', function(e){
+      if(e.key === 'Escape'){ this.value=''; searchGames(); }
     });
-}
-</script>
+
+  </script>
 
 </body>
 </html>
