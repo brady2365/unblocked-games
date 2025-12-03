@@ -25,7 +25,7 @@
       color: var(--soft);
       font-family: Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
-      padding-top: 80px; /* space for fixed navbar */
+      padding-top: 100px; /* enough space for navbar */
       box-sizing: border-box;
     }
 
@@ -36,39 +36,37 @@
       border-bottom: 3px solid var(--gold);
       padding: 12px 20px;
       display: flex;
-      gap: 20px;
+      flex-wrap: wrap;
       align-items: center;
+      justify-content: space-between;
       position: fixed;
       top: 0;
       left: 0;
-      right: 0;
       z-index: 9999;
       box-shadow: 0 0 15px rgba(212,179,0,0.12);
-      flex-wrap: wrap; /* wrap on small screens */
     }
 
-    .navbar .logo {
+    .logo {
       color: var(--gold);
       font-size: 20px;
       font-weight: 700;
-      letter-spacing: 0.4px;
+      margin-bottom: 6px;
     }
 
     .nav-search {
-      margin-left: 8px;
       flex: 1;
       display: flex;
       justify-content: center;
-      min-width: 180px;
+      margin: 6px 0;
     }
 
     .nav-search input {
       padding: 8px 12px;
-      width: 380px;
+      width: 300px;
       max-width: 100%;
       border-radius: 10px;
-      outline: none;
       border: 2px solid var(--gold);
+      outline: none;
       background-color: #0f3114;
       color: var(--soft);
       font-size: 15px;
@@ -82,15 +80,15 @@
     .nav-links {
       display: flex;
       gap: 12px;
-      align-items: center;
       flex-wrap: wrap;
+      justify-content: center;
     }
 
     .nav-links a {
       color: var(--soft);
       text-decoration: none;
       font-size: 15px;
-      white-space: nowrap; /* don’t break text */
+      white-space: nowrap;
     }
 
     .nav-links a:hover {
@@ -98,16 +96,16 @@
       text-shadow: 0 0 8px rgba(212,179,0,0.25);
     }
 
-    /* Page headings */
+    /* PAGE HEADING */
     .page-head {
       text-align: center;
-      padding: 20px 0;
+      margin-bottom: 20px;
     }
 
     .page-head h1 {
       color: var(--gold);
-      margin: 0;
       font-size: 28px;
+      margin: 0;
     }
 
     .separator {
@@ -230,7 +228,7 @@
         grid-template-columns: repeat(2, 1fr);
       }
       .nav-search input {
-        width: 240px;
+        width: 200px;
       }
     }
 
@@ -241,19 +239,8 @@
       iframe.game-frame {
         height: 300px;
       }
-      .navbar {
-        padding: 10px;
-        gap: 10px;
-      }
-      .nav-search {
-        order: 3;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-      }
-      .nav-links {
-        width: 100%;
-        justify-content: center;
+      .nav-search input {
+        width: 160px;
       }
     }
 
@@ -261,7 +248,7 @@
       display: flex;
       justify-content: center;
       margin-top: 18px;
-      margin-bottom: 60px; /* extra space under form */
+      margin-bottom: 80px; /* extra space at bottom */
     }
 
     .request-wrap iframe {
@@ -288,17 +275,15 @@
     </div>
   </div>
 
-  <!-- Page head -->
+  <!-- PAGE HEADING -->
   <div class="page-head">
     <h1 id="games">Game Library</h1>
   </div>
 
   <div class="separator"></div>
 
-  <!-- category area -->
   <div class="categories" aria-hidden="true"></div>
 
-  <!-- GAME GRID -->
   <div id="gameContainer" class="game-grid"></div>
 
   <div class="separator"></div>
@@ -350,9 +335,7 @@
         <div class="game-card" data-title="${escapeHtml(g.title)}">
           <h3>${escapeHtml(g.title)}</h3>
           <iframe id="${g.id}" class="game-frame" allowfullscreen></iframe>
-          <div class="overlay" role="button" aria-label="Play ${escapeHtml(g.title)}" onclick="loadGame('${g.id}','${g.url}', this)">
-            Play
-          </div>
+          <div class="overlay" role="button" aria-label="Play ${escapeHtml(g.title)}" onclick="loadGame('${g.id}','${g.url}', this)">Play</div>
           <button class="fullscreen-button" onclick="fullscreenFrame('${g.id}')">Fullscreen</button>
         </div>
       `;
