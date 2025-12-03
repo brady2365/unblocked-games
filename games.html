@@ -72,10 +72,12 @@ body {
   opacity: 0.9;
 }
 
+/* Move links a little left */
 .nav-links {
   display: flex;
   gap: 12px;
-  flex-shrink: 0; /* prevents shrinking */
+  flex-shrink: 0;
+  margin-left: 10px; /* shifted left */
 }
 
 .nav-links a {
@@ -213,7 +215,7 @@ iframe.game-frame {
   .game-grid { grid-template-columns: 1fr; }
   iframe.game-frame { height: 300px; }
   .nav-search { order: 3; width: 100%; justify-content: center; margin: 5px 0; }
-  .nav-links { justify-content: flex-start; gap: 8px; }
+  .nav-links { justify-content: flex-start; gap: 8px; margin-left:5px; }
 }
 </style>
 </head>
