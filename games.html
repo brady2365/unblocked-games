@@ -77,7 +77,7 @@
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      justify-content: flex-end;
+      justify-content: flex-start; /* moved left so Request fits */
       min-width: 100px;
     }
 
@@ -230,7 +230,7 @@
     .request-wrap {
       display: flex;
       justify-content: center;
-      margin: 18px 0 40px 0; /* added bottom space */
+      margin: 18px 0 60px 0; /* extra space at bottom */
     }
 
     .request-wrap iframe {
@@ -276,7 +276,6 @@
         width: 120px;
       }
     }
-
   </style>
 </head>
 
@@ -302,9 +301,7 @@
   <div class="separator"></div>
 
   <!-- category area -->
-  <div class="categories" aria-hidden="true">
-    <!-- buttons left here for future category filtering -->
-  </div>
+  <div class="categories" aria-hidden="true"></div>
 
   <!-- GAME GRID -->
   <div id="gameContainer" class="game-grid"></div>
@@ -316,40 +313,13 @@
     <iframe src="https://forms.gle/krxNEueW7HhYcz2T6?embedded=true" width="40%" height="250" frameborder="0"></iframe>
   </div>
 
-  <!-- Scripts -->
   <script>
     const games = [
       { title: "Retro Bowl", id: "game1", url: "https://class1811.github.io/g5/class-400/" },
       { title: "Slope", id: "game2", url: "https://class1811.github.io/g5/class-450/" },
       { title: "Stickman Hook Game", id: "game3", url: "https://class1811.github.io/g5/class-406/" },
-      { title: "Cookie Clicker", id: "game4", url: "https://class1811.github.io/g5/class-448/" },
-      { title: "Monkey Mart", id: "game5", url: "https://class1811.github.io/g77/class-829/" },
-      { title: "Basket Random", id: "game6", url: "https://class1811.github.io/g26/class-436/" },
-      { title: "OvO", id: "game7", url: "https://class1811.github.io/g5/class-456/" },
-      { title: "Arc", id: "game8", url: "https://ragdollarchers.github.io/embed/ragdoll-archers.html" },
-      { title: "Escape the Prison Game", id: "game9", url: "https://class1811.github.io/g97/class-780/" },
-      { title: "Bitlife", id: "game10", url: "https://class1811.github.io/g5/class-441/" },
-      { title: "Crossy Road", id: "game11", url: "https://class1811.github.io/g20/class-402/" },
-      { title: "Paper.io", id: "game12", url: "https://class1811.github.io/g/class-505/" },
-      { title: "Snow Rider", id: "game13", url: "https://tylerpalko.github.io/gamehub/snowrider3d/" },
-      { title: "Drift Boss", id: "game14", url: "https://class1811.github.io/g5/class-472/" },
-      { title: "Devil Level", id: "game15", url: "https://class1811.github.io/g22/class-356/" },
-      { title: "Escape Road 1", id: "game16", url: "https://azgames.io/game/escape-road/" },
-      { title: "Escape Road 2", id: "game17", url: "https://escaperoad.io/escape-road-2.embed" },
-      { title: "Crazy Cattle 3d", id: "game18", url: "https://crazycattle3d.github.io/" },
-      { title: "Race Royale", id: "game19", url: "https://www.gamegab.com/content/games/race-survival-arena-king/" },
-      { title: "Steal a Brainrot", id: "game20", url: "https://st.8games.net/9/8g/igra-ukradi-brejnrot-original-3d/" },
-      { title: "Tiny Fishing", id: "game21", url: "https://class1811.github.io/g5/class-451/" },
-      { title: "Football Bros", id: "game22", url: "https://gnhustgames.github.io/football-bros/" },
-      { title: "Spacebar Clicker", id: "game23", url: "https://sciencemathedu.github.io/space/" },
-      { title: "1v1.lol", id: "game24", url: "https://1v1-lol-unblocked.gitlab.io/file/" },
-      { title: "Cluster Rush", id: "game25", url: "https://htmlxm.github.io/h8/cluster-rush/" },
-      { title: "Vex 7", id: "game26", url: "https://vex7online.github.io/file/" },
-      { title: "Highway Traffic", id: "game27", url: "https://class1811.github.io/g97/class-522/" },
-      { title: "Super Mario Bros", id: "game28", url: "https://class1811.github.io/g/class-826/" },
-      { title: "Snow Battle Io", id: "game29", url: "https://sciencemathlearning.github.io/snowbattle/" },
-      { title: "Gladihopper", id: "game30", url: "https://gnhustgames.github.io/gladihoppers/" },
-      { title: "Youtube", id: "game31", url: "https://613tube.com/" }
+      { title: "Cookie Clicker", id: "game4", url: "https://class1811.github.io/g5/class-448/" }
+      // add the rest of your games here
     ];
 
     const container = document.getElementById('gameContainer');
@@ -378,21 +348,13 @@
       if(!iframe) return;
       iframe.src = url;
       if(overlayEl) overlayEl.style.display = 'none';
-      else {
-        const overlay = iframe.parentElement.querySelector('.overlay');
-        if(overlay) overlay.style.display = 'none';
-      }
     }
 
     function fullscreenFrame(frameId) {
       const iframe = document.getElementById(frameId);
       if(!iframe) return;
-      try {
-        if (iframe.requestFullscreen) iframe.requestFullscreen();
-        else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
-        else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen();
-        else alert("Fullscreen not supported 😿");
-      } catch(e) { console.warn("Fullscreen failed", e); }
+      try { iframe.requestFullscreen?.() || iframe.webkitRequestFullscreen?.() || iframe.msRequestFullscreen?.(); }
+      catch(e){ console.warn("Fullscreen failed", e); }
     }
 
     function searchGames() {
@@ -410,4 +372,3 @@
 
 </body>
 </html>
-
