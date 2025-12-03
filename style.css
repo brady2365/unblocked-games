@@ -14,6 +14,9 @@ body {
 }
 
 .navbar {
+    position: fixed; /* or fixed if u want it always on top */
+    top: 0;
+    z-index: 10000;
     width: 100%;
     background: var(--card-bg);
     border-bottom: 3px solid var(--gold);
@@ -21,11 +24,7 @@ body {
     display: flex;
     gap: 20px;
     align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 10000;
     box-shadow: 0 0 15px rgba(212,179,0,0.12);
-    position: sticky;
 }
 
 .navbar .logo { color: var(--gold); font-size: 20px; font-weight: 700; letter-spacing: .4px; }
