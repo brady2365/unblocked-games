@@ -312,7 +312,17 @@ function createCardHTML(g) {
   `;
 }
 
-games.forEach(g => container.insertAdjacentHTML('beforeend', createCardHTML(g)));
+games.forEach(g => {
+  container.insertAdjacentHTML('beforeend', createCardHTML(g));
+  // set bg image after insertion to avoid quoting/escaping issues
+  const imgEl = document.getElementById(`img-${g.id}`);
+  if(imgEl && g.img) {
+    imgEl.style.backgroundImage = `url("${g.img}")`;
+  } else if (imgEl) {
+    // optional: fallback image if g.img missing
+    imgEl.style.backgroundImage = 'url("https://upload.wikimedia.org/wikipedia/en/b/bf/Retro_Bowl_cover.png")';
+  }
+});
 
 function loadGame(frameId, url, overlayEl) {
   const iframe = document.getElementById(frameId);
@@ -320,6 +330,9 @@ function loadGame(frameId, url, overlayEl) {
   iframe.src = url;
   if(overlayEl) overlayEl.style.display = 'none';
 }
+
+
+
 
 function fullscreenFrame(frameId) {
   const iframe = document.getElementById(frameId);
