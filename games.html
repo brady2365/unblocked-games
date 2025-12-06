@@ -299,8 +299,14 @@ function createCardHTML(g) {
   return `
     <div class="game-card" data-title="${escapeHtml(g.title)}">
       <h3>${escapeHtml(g.title)}</h3>
-      <iframe id="${g.id}" class="game-frame" allowfullscreen></iframe>
+
+      <!-- thumbnail container (will be filled by JS) -->
+      <div class="game-img" id="img-${g.id}"></div>
+
+      <iframe id="${g.id}" class="game-frame" style="display:none;" allowfullscreen></iframe>
+
       <div class="overlay" onclick="loadGame('${g.id}','${g.url}', this)">Play</div>
+
       <button class="fullscreen-button" onclick="fullscreenFrame('${g.id}')">Fullscreen</button>
     </div>
   `;
